@@ -60,9 +60,7 @@ static ESNetwork *instance = nil;
     [operation setUrl:url];
     [operation setParams:params];
     [operation setRef:ref];
-    
-    NSLog(@"url : %@", url);
-    NSLog(@"param : %@", [params allKeys]);
+
     [operation setTarget:target];
     [operation setManager:self];
     [operation setAction:@selector(didFinishOperationWithResult:)];
@@ -90,17 +88,14 @@ static ESNetwork *instance = nil;
             
             if ([operation.result isKindOfClass:[NSDictionary class]] ||
                 [operation.result isKindOfClass:[NSArray class]]) {
-                NSLog(@"url : %@", operation.url);
                 [operation.target didReceiveRequest:operation.url withResult:operation.result withError:operation.error withRef:operation.ref];
             } else {
                 
                 if ([operation.result isKindOfClass:[NSData class]]) {
                     NSString *str = [[NSString alloc] initWithData:operation.result encoding:NSUTF8StringEncoding];
-                    NSLog(@"url : %@\n error : %@", operation.url, str);
                     
                 } else {
                     
-                    NSLog(@"url : %@\n error : %@", operation.url, operation.result);
                     
                 }
                 
