@@ -57,7 +57,7 @@
     NSData *ret = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     NSString *str = [[NSString alloc] initWithData:ret encoding:NSUTF8StringEncoding];
-    NSLog(@"str : %@", str);
+
     if (ret != nil) {
         NSError *jsonError = nil;
         NSObject *retDic = [NSJSONSerialization JSONObjectWithData:ret options:NSJSONReadingMutableContainers error:&jsonError];
