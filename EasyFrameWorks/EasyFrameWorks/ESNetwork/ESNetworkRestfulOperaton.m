@@ -45,7 +45,7 @@
                 urlString = [urlString stringByAppendingString:@"&"];
             }
             urlString = [urlString substringToIndex:[urlString length]-1];
-            [request setURL:[NSURL URLWithString:[request.URL.absoluteString stringByAppendingString:urlString]]];
+            [request setURL:[NSURL URLWithString:[request.URL.absoluteString stringByAppendingFormat:@"?%@", urlString]]];
         } else {
             NSData *requestData = [[self requestData:self.params] dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -56,8 +56,6 @@
     
     NSData *ret = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
-    NSString *str = [[NSString alloc] initWithData:ret encoding:NSUTF8StringEncoding];
-
     if (ret != nil) {
         NSError *jsonError = nil;
         NSObject *retDic = [NSJSONSerialization JSONObjectWithData:ret options:NSJSONReadingMutableContainers error:&jsonError];
